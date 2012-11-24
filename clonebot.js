@@ -7,8 +7,12 @@ var irc = require("irc"),
 var app = express.createServer(express.logger()),
     port = process.env.PORT || 5000;
 
-    app.get("/", function(request, response) {
-        response.send("#CloneWars logs");
+    app.configure(function() {
+        app.use(express.static(__dirname + "/logs"));
+        app.use(express.directory(__dirname + "/logs", {
+            icons: true
+        }));
+        app.use(express.errorHandler());
     });
 
     app.listen(port, function() {
