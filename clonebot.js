@@ -25,12 +25,14 @@ var config = {
     nick: "clonebot",
     channels: ["#clonewars"],
     path: "logs",
-    debug: true
+    debug: true,
+    connect: false
 }
 
 var client = new irc.Client(config.server, config.nick, {
         channels: config.channels,
-        debug: config.debug
+        debug: config.debug,
+        autoConnect: config.connect
     });
 
     client.addListener("message#", function(from, to, message) {
@@ -67,3 +69,4 @@ var logger = {
         this.file.write("[" + time + "] " + text + "\n");
     }
 };
+
